@@ -1,0 +1,7 @@
+<div class="app-container">
+  <app-navbar *ngIf="shouldShowNavbar"></app-navbar>
+  <div class="content-wrapper" [ngClass]="{'with-navbar': shouldShowNavbar}">
+    <router-outlet></router-outlet>
+    <app-profile-form *ngIf="showProfileForm" (completed)="onProfileCompleted()"></app-profile-form>
+  </div>
+</div>

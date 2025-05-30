@@ -1,0 +1,180 @@
+.profile-form-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.profile-form {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  padding: 2.5rem 2.7rem 2rem 2.7rem;
+  border-radius: 22px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.22);
+  width: 440px;
+  max-width: 98vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+
+.step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-bg-primary);
+  color: var(--color-text-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+.active-step {
+  background: var(--color-accent-secondary);
+  color: var(--color-text-primary);
+  box-shadow: 0 2px 8px rgba(98,70,234,0.18);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.3rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid var(--color-bg-primary);
+  background: linear-gradient(90deg, var(--color-bg-primary) 60%, var(--color-bg-secondary) 100%);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 0.5rem;
+}
+
+.section-header .icon {
+  font-size: 1.5rem;
+  margin-right: 0.3rem;
+}
+
+.section-header .avatar {
+  background: var(--color-accent-secondary);
+  color: var(--color-text-primary);
+  border-radius: 50%;
+  width: 2.3rem;
+  height: 2.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 8px rgba(98,70,234,0.10);
+}
+
+.profile-form h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--color-text-primary);
+  border: none;
+  padding: 0;
+  font-weight: 600;
+}
+
+.form-row {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.form-row.nav-row {
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.profile-form input,
+.profile-form select,
+.profile-form textarea {
+  flex: 1;
+  padding: 0.8rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.profile-form input:focus,
+.profile-form select:focus,
+.profile-form textarea:focus {
+  border-color: var(--color-accent-secondary);
+  box-shadow: 0 0 0 2px rgba(98,70,234,0.2);
+  outline: none;
+  background: var(--color-bg-primary);
+}
+
+.profile-form input:hover,
+.profile-form select:hover,
+.profile-form textarea:hover {
+  border-color: var(--color-accent-tertiary);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.error {
+  color: #d32f2f;
+  background: rgba(211,47,47,0.1);
+  border-left: 4px solid #d32f2f;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.97rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.2rem;
+  box-shadow: 0 1px 4px rgba(211,47,47,0.06);
+}
+
+.submit-btn {
+  background: linear-gradient(90deg, var(--color-accent-secondary) 60%, var(--color-accent-tertiary) 100%);
+  color: var(--color-text-primary);
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.13rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.7rem;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(98,70,234,0.18);
+}
+
+.submit-btn:disabled {
+  background: rgba(98,70,234,0.4);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, var(--color-accent-tertiary) 60%, var(--color-accent-secondary) 100%);
+  box-shadow: 0 4px 16px rgba(98,70,234,0.23);
+  transform: translateY(-2px) scale(1.03);
+}

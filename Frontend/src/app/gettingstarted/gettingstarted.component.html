@@ -1,0 +1,37 @@
+<div class="getting-started-container">
+  <div class="hero-section">
+    <h1 class="codetrace-title">CodeTrace</h1>
+    <p class="subtitle">Level up your coding journey with a modern, gamified platform.</p>
+    <div class="buttons-container">
+      <button (click)="navigateTo('/register')" class="primary-btn">Get Started</button>
+      <button (click)="navigateTo('/login')" class="secondary-btn">Login</button>
+    </div>
+  </div>
+  <h2 class="features-heading">Why CodeTrace?</h2>
+  <p class="features-description">
+    Unlock a world of coding growth, competition, and opportunity. Explore our platform's unique features:
+  </p>
+
+  <div class="features-section">
+    <div class="feature-card" (click)="navigateTo('/leaderboard')">
+      <span class="feature-icon">🏆</span>
+      <h3>Leaderboard</h3>
+      <p>Compete with peers and climb the ranks as you solve challenges and complete courses.</p>
+    </div>
+    <div class="feature-card" (click)="navigateTo('/courses')">
+      <span class="feature-icon">📚</span>
+      <h3>Courses</h3>
+      <p>Access curated learning paths and interactive tutorials to master new skills.</p>
+    </div>
+    <div class="feature-card" (click)="navigateTo('/oppurtunities')">
+      <span class="feature-icon">💼</span>
+      <h3>Opportunities</h3>
+      <p>Discover internships, jobs, and hackathons tailored to your interests and progress.</p>
+    </div>
+    <div class="feature-card" (click)="navigateTo('/profile')">
+      <span class="feature-icon">👤</span>
+      <h3>Profile</h3>
+      <p>Showcase your achievements, skills, and certifications in a beautiful profile.</p>
+    </div>
+  </div>
+</div>

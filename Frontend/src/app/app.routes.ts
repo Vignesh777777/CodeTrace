@@ -1,0 +1,19 @@
+import { Routes } from '@angular/router';
+import { SigninComponent } from './signin/signin.component';
+import { RegisterComponent } from './register/register.component';
+import { GettingstartedComponent } from './gettingstarted/gettingstarted.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CoursesComponent } from './courses/courses.component';
+import { OppurtunitiesComponent } from './oppurtunities/oppurtunities.component';
+export const routes: Routes = [
+    { path: '', component: GettingstartedComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'login', component: SigninComponent },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'leaderboard', component: LeaderboardComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'courses', component: CoursesComponent },
+    { path: 'oppurtunities', component: OppurtunitiesComponent }
+];

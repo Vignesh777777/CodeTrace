@@ -1,0 +1,71 @@
+<div class="profile-form-overlay">
+  <form class="profile-form" (ngSubmit)="completeSetup()" #profileForm="ngForm">
+    <div *ngIf="errorMessage" class="error error-alert">{{ errorMessage }}</div>
+    <div class="step-indicator">
+      <div *ngFor="let s of [1,2,3,4]; let i = index" [class.active-step]="step === s" class="step-dot">{{ s }}</div>
+    </div>
+    <!-- Step 1: Personal Details -->
+    <div *ngIf="step === 1">
+      <div class="section-header"><span class="icon avatar">👤</span><h2>Personal Details</h2></div>
+      <div class="form-row">
+        <input type="text" [(ngModel)]="profile.name" name="name" placeholder="Name" required #name="ngModel">
+        <input type="number" [(ngModel)]="profile.graduationYear" name="graduationYear" placeholder="Graduation Year" required #graduationYear="ngModel">
+      </div>
+      <div class="form-row">
+        <input type="text" [(ngModel)]="profile.rollNo" name="rollNo" placeholder="Roll No" required #rollNo="ngModel">
+        <input type="tel" [(ngModel)]="profile.phoneNo" name="phoneNo" placeholder="Phone No" required pattern="[0-9]{10}" #phoneNo="ngModel">
+      </div>
+      <div class="form-row">
+        <select [(ngModel)]="profile.department" name="department" required #department="ngModel">
+          <option value="" disabled selected>Department</option>
+          <option>CSE</option>
+          <option>ECE</option>
+          <option>EEE</option>
+          <option>MECH</option>
+          <option>CIVIL</option>
+        </select>
+        <input type="text" [(ngModel)]="profile.section" name="section" placeholder="Section" required #section="ngModel">
+      </div>
+      <div class="error" *ngIf="(name.invalid && name.touched) || (graduationYear.invalid && graduationYear.touched) || (rollNo.invalid && rollNo.touched) || (phoneNo.invalid && phoneNo.touched) || (department.invalid && department.touched) || (section.invalid && section.touched)">
+        Please fill all personal details correctly. Phone number must be 10 digits.
+      </div>
+    </div>
+
+    <!-- Step 2: Coding Profiles -->
+    <div *ngIf="step === 2">
+      <div class="section-header"><span class="icon">💻</span><h2>Coding Profiles</h2></div>
+      <div class="form-row">
+        <input type="text" [(ngModel)]="profile.codechef" name="codechef" placeholder="CodeChef Username" #codechef="ngModel">
+        <input type="text" [(ngModel)]="profile.hackerrank" name="hackerrank" placeholder="HackerRank Username" #hackerrank="ngModel">
+      </div>
+      <div class="form-row">
+        <input type="text" [(ngModel)]="profile.leetcode" name="leetcode" placeholder="LeetCode Username" #leetcode="ngModel">
+        <input type="text" [(ngModel)]="profile.github" name="github" placeholder="GitHub Username" #github="ngModel">
+      </div>
+      <div class="form-row">
+        <input type="text" [(ngModel)]="profile.codeforces" name="codeforces" placeholder="Codeforces Username" #codeforces="ngModel">
+        <input type="text" [(ngModel)]="profile.geeksforgeeks" name="geeksforgeeks" placeholder="GeeksforGeeks Username" #geeksforgeeks="ngModel">
+      </div>
+    </div>
+
+    <!-- Step 3: Skills -->
+    <div *ngIf="step === 3">
+      <div class="section-header"><span class="icon">🛠️</span><h2>Skills</h2></div>
+      <input type="text" [(ngModel)]="profile.skills" name="skills" placeholder="Skills (comma separated)" class="full-width" required #skills="ngModel">
+      <div class="error" *ngIf="skills.invalid && skills.touched">Skills are required.</div>
+    </div>
+
+    <!-- Step 4: Description -->
+    <div *ngIf="step === 4">
+      <div class="section-header"><span class="icon">📝</span><h2>Description</h2></div>
+      <textarea [(ngModel)]="profile.description" name="description" placeholder="Describe yourself..." rows="3" class="full-width" required #description="ngModel"></textarea>
+      <div class="error" *ngIf="description.invalid && description.touched">Description is required.</div>
+    </div>
+
+    <div class="form-row nav-row">
+      <button type="button" class="submit-btn" (click)="prevStep()" *ngIf="step > 1">Back</button>
+      <button type="submit" class="submit-btn" [disabled]="!isCurrentStepValid()" *ngIf="step < 4">Next</button>
+      <button type="submit" class="submit-btn" [disabled]="profileForm.invalid" *ngIf="step === 4">Complete Setup</button>
+    </div>
+  </form>
+</div>

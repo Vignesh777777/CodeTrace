@@ -1,0 +1,117 @@
+<div class="opportunities-container">
+  <div class="opportunities-header">
+    <h1>Opportunities</h1>
+    <button *ngIf="authService.isAdmin()" class="add-opportunity-btn" (click)="toggleAddForm()">
+      <span class="add-icon">+</span> Add Opportunity
+    </button>
+  </div>
+
+  <!-- Success message when opportunity is added -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+  
+  <!-- Error message for operations -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div class="opportunities-grid">
+    <div class="opportunity-card" *ngFor="let opportunity of opportunities" [class.expired]="isDeadlinePassed(opportunity.deadline)">
+      <div class="opportunity-content">
+        <div class="opportunity-header">
+          <h3>{{ opportunity.name }}</h3>
+          <div class="opportunity-company">{{ opportunity.company }}</div>
+        </div>
+        
+        <p class="opportunity-description">{{ opportunity.description }}</p>
+        
+        <div class="opportunity-details">
+          <div class="opportunity-dates">
+            <span class="opportunity-date">Added: {{ formatDate(opportunity.createdAt) }}</span>
+            <span class="opportunity-deadline" [class.expired]="isDeadlinePassed(opportunity.deadline)">
+              Deadline: {{ formatDate(opportunity.deadline) }}
+            </span>
+          </div>
+        </div>
+        
+        <!-- View Opportunity Button -->
+        <div class="opportunity-actions">
+          <a [href]="opportunity.link" target="_blank" class="opportunity-link">
+            View Opportunity
+          </a>
+        </div>
+        
+        <!-- Admin Controls -->
+        <div class="admin-controls" *ngIf="authService.isAdmin()">
+          <button class="edit-btn" (click)="toggleUpdateForm(opportunity)">Edit</button>
+          <button class="delete-btn" (click)="confirmDelete(opportunity.id)">Delete</button>
+        </div>
+        
+        <!-- Delete Confirmation -->
+        <div class="delete-confirmation" *ngIf="confirmDeleteId === opportunity.id">
+          <p>Are you sure you want to delete this opportunity?</p>
+          <div class="delete-actions">
+            <button class="cancel-delete-btn" (click)="cancelDelete()">Cancel</button>
+            <button class="confirm-delete-btn" (click)="deleteOpportunity(opportunity.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Update Opportunity Form Overlay -->
+  <div class="add-opportunity-overlay" *ngIf="showAddForm">
+    <div class="add-opportunity-form" 
+         [@formAnimation]="showAddForm ? 'open' : 'closed'">
+      <div class="form-header">
+        <h2>{{ showUpdateForm ? 'Update Opportunity' : 'Add New Opportunity' }}</h2>
+        <button class="close-btn" (click)="toggleAddForm()">×</button>
+      </div>
+
+      <div class="form-content">
+        <div class="form-group">
+          <label for="name">Opportunity Title</label>
+          <input type="text" id="name" [(ngModel)]="newOpportunity.name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input type="text" id="company" [(ngModel)]="newOpportunity.company" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" [(ngModel)]="newOpportunity.description" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="link">Application Link</label>
+          <input type="url" id="link" [(ngModel)]="newOpportunity.link" required>
+        </div>
+
+        <div class="form-group">
+          <label for="imageUrl">Company Logo URL</label>
+          <input type="url" id="imageUrl" [(ngModel)]="newOpportunity.imageUrl">
+        </div>
+
+        <div class="form-group">
+          <label for="deadline">Application Deadline</label>
+          <input type="date" id="deadline" [(ngModel)]="newOpportunity.deadline" required>
+        </div>
+
+        <div class="form-actions">
+          <button class="cancel-btn" (click)="toggleAddForm()">Cancel</button>
+          <button *ngIf="!showUpdateForm" class="submit-btn" (click)="addOpportunity()" 
+                  [disabled]="!newOpportunity.name || !newOpportunity.company || !newOpportunity.description || !newOpportunity.link || !newOpportunity.deadline">
+            Add Opportunity
+          </button>
+          <button *ngIf="showUpdateForm" class="submit-btn" (click)="updateOpportunity()" 
+                  [disabled]="!newOpportunity.name || !newOpportunity.company || !newOpportunity.description || !newOpportunity.link || !newOpportunity.deadline">
+            Update Opportunity
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

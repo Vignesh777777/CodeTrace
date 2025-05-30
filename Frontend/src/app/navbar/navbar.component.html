@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="navbar-title" (click)="navigate('/dashboard')">CodeTrace</span>
+    <a (click)="navigate('/dashboard')" [class.active]="router.url === '/dashboard'">Dashboard</a>
+    <a (click)="navigate('/leaderboard')" [class.active]="router.url === '/leaderboard'">Leaderboard</a>
+    <a (click)="navigate('/courses')" [class.active]="router.url === '/courses'">Courses</a>
+    <a (click)="navigate('/oppurtunities')" [class.active]="router.url === '/oppurtunities'">Opportunities</a>
+  </div>
+  <div class="navbar-right" *ngIf="userEmail">
+    <div class="profile-dropdown" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()">
+      <span class="profile-email">{{ userEmail }}</span>
+      <span class="role-badge" *ngIf="userRole === 'admin'">Admin</span>
+      <span class="dropdown-arrow">&#9662;</span>
+      <div class="dropdown-menu" *ngIf="dropdownOpen">
+        <a (click)="navigate('/profile')">Profile</a>
+        <a (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>
